@@ -3,7 +3,11 @@
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
+  /* animation: App-logo-spin infinite 20s linear; */
+  animation-name: App-logo-spin;
+  animation-duration: 20s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
   height: 40vmin;
 }
 
@@ -29,4 +33,26 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.upgrade-button {
+  padding: 5px 20px;
+  border-radius: 5px;
+  display: inline-block;
+  border: 1px solid #fff;
+  cursor: pointer;
+}
+
+.upgrade-button:hover{
+  opacity: 0.8f;
+}
+
+
+.upgraded-button {
+  padding: 5px 20px;
+  border-radius: 5px;
+  display: inline-block;
+  border: 1px solid #aaa;
+  color: #aaa;
+  pointer-events: none;
 }

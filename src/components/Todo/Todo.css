@@ -1,0 +1,11 @@
+/* Todo.css */
+
+.Todo ul {
+    list-style: none;
+    padding: 0;
+}
+
+.Todo ul li {
+    text-align: center;
+    padding: 5px;
+}
