@@ -31,7 +31,7 @@
   }
 }
 
-.upgrade-button {
+.click-button {
   padding: 5px 20px;
   border-radius: 5px;
   display: inline-block;
@@ -39,11 +39,11 @@
   cursor: pointer;
 }
 
-.upgrade-button:hover{
+.click-button:hover{
   opacity: 0.8f;
 }
 
-.upgraded-button {
+.clickd-button {
   padding: 5px 20px;
   border-radius: 5px;
   display: inline-block;

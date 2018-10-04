@@ -14,9 +14,15 @@ class App extends Component {
       timer: '0'
     }
 
+    // timeUpdateのID
     this.timerObs = null;
+
+    // Max Count
+    this.maxCount = "100";
+    
   }
 
+  // Timer
   timerStart = () => {
     this.setState({timer: '0'});
     this.timerObs = setInterval(this.timerUpdate, 1000);
@@ -31,9 +37,10 @@ class App extends Component {
     clearInterval(this.timerObs);
   }
 
-  // eventhandler
-  // let timerObs;
+  // クリック時の処理
   onClickHandler = () => {
+
+    // Timerの登録
     if(this.state.clickTotal === '0')   
       this.timerStart();
     
@@ -45,6 +52,7 @@ class App extends Component {
     this.setState({clickTotal: nextVersion.toFixed(0)})
   }
 
+  // リセット時の処理
   onResetHandler = () => {
 
     // clickTotalを0にする
@@ -57,29 +65,31 @@ class App extends Component {
 
   render() {
 
-    let upgradeButton = (
+    // クリックボタン
+    let clickButton = (
       <p onClick={this.onClickHandler}
-      id='upgradeButton'
-      className="upgrade-button">
+      id='clickButton'
+      className="click-button">
       CLICK</p>
     )
 
     if(this.state.clickTotal === '0'){
-      upgradeButton = (
+      clickButton = (
         <p onClick={this.onClickHandler}
-        id='upgradeButton'
-        className='upgrade-button'>
+        id='clickButton'
+        className='click-button'>
         START</p>
       );
     }
 
-    if(this.state.clickTotal === '50' ){
-      upgradeButton = (
+    if(this.state.clickTotal === this.maxCount ){
+      clickButton = (
         <p 
-        className='upgraded-button'>
+        className='clickd-button'>
         CLEAR</p>
       );
 
+      // Timerの解除
       this.timerStop();
 
       const resetDiv = document.querySelector('.App-result');
@@ -93,26 +103,22 @@ class App extends Component {
       RESET</p>
     );
 
-    // console.log(this.state.timer);
-
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
-            100回クリックできれば、このゲームはクリアだ！
+            This Game finish, if you do button clicked {this.maxCount} times.
           </p>
           <div>
           <Title title="Hello World 3.0" titleStyle={{color : "orange"}}>
             COUNT <span id='versionCounter' style={{borderBottom: '1px solid orange'}}>{this.state.clickTotal}</span></Title>
-            {upgradeButton}
+            {clickButton}
           </div>
 
           <div className='App-result'>
-            <p>
-              このゲームは大切ものを盗んでいきました。あなたの時間です。
-              経過時間 {this.state.timer}秒
-            </p>
+            <p>CLEAR</p>
+            <p>TIME: {this.state.timer}s</p>              
             {resetButton}
           </div>
         </header>

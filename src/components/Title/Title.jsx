@@ -2,7 +2,6 @@
 
 // 外部のライブラリやファイルを参照するインポートの部分
 import React from 'react';
-import './Title.css';
 
 // JSXやメソッドを定義する実質上の中身
 const Title = (props) => {
