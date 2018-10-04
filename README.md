@@ -6,9 +6,9 @@ Reactを使用したWebサイト
 
 ## Description
 
-npmとwebpackで書き換えたヴァージョンです。
-sass, jsをそれぞれモジュール化しました。
-Web Componentsもfooterで組み込んでいます。
+学習したDemoをもとにWebサイトを制作。
+
+クリックした回数が上限に達したらクリア。
 
 website: [https://react-clicker.netlify.com](https://react-clicker.netlify.com)
 
