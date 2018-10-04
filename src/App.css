@@ -22,10 +22,6 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -47,7 +43,6 @@
   opacity: 0.8f;
 }
 
-
 .upgraded-button {
   padding: 5px 20px;
   border-radius: 5px;
@@ -55,4 +50,20 @@
   border: 1px solid #aaa;
   color: #aaa;
   pointer-events: none;
+}
+
+.App-result {
+  display: none;
+}
+
+.reset-button {
+  padding: 5px 20px;
+  border-radius: 5px;
+  display: inline-block;
+  border: 1px solid #fff;
+  cursor: pointer;
+}
+
+.reset-button:hover {
+  opacity: 0.8f;
 }

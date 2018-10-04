@@ -4,76 +4,117 @@ import './App.css';
 
 // Title.jsxをインポートする
 import Title from './components/Title/Title';
-import Todo from './components/Todo/Todo';
 
 class App extends Component {
 
   constructor(){
     super();
     this.state = { 
-      version: '0'
+      clickTotal: '0',
+      timer: '0'
     }
+
+    this.timerObs = null;
+  }
+
+  timerStart = () => {
+    this.setState({timer: '0'});
+    this.timerObs = setInterval(this.timerUpdate, 1000);
+  }
+
+  timerUpdate = () => {
+    let nextTimer = parseInt(this.state.timer, 10) + 1;
+    this.setState({timer: nextTimer});
+  }
+
+  timerStop = () => {
+    clearInterval(this.timerObs);
   }
 
   // eventhandler
+  // let timerObs;
   onClickHandler = () => {
+    if(this.state.clickTotal === '0')   
+      this.timerStart();
+    
     // parseIntは文字列を数字に変換する
-    let nextVersion = parseInt(this.state.version, 10) + 1;
+    let nextVersion = parseInt(this.state.clickTotal, 10) + 1;
 
     // toFixedは小数点の桁数を指定
     // StateはsetStateメソッドで変更
-    this.setState({version: nextVersion.toFixed(0)})
+    this.setState({clickTotal: nextVersion.toFixed(0)})
+  }
 
+  onResetHandler = () => {
+
+    // clickTotalを0にする
+    this.setState({clickTotal: '0'});
+
+    // App-resultを非表示にする
+    const resultDiv = document.querySelector('.App-result');
+    resultDiv.style.display = 'none';
   }
 
   render() {
 
-    // 
-    // if文を用いてupgradeButtonの要素を書き換える
-    // 
-    // UpgradeButtonの初期要素
     let upgradeButton = (
       <p onClick={this.onClickHandler}
       id='upgradeButton'
       className="upgrade-button">
-      UPGRADE</p>
+      CLICK</p>
     )
 
-    if(this.state.version === '100' ){
+    if(this.state.clickTotal === '0'){
       upgradeButton = (
-        // バージョンが5.0になったときに表示されてほしいボタン
-        <p 
-        className='upgraded-button'>
-        You accomplished</p>
+        <p onClick={this.onClickHandler}
+        id='upgradeButton'
+        className='upgrade-button'>
+        START</p>
       );
     }
+
+    if(this.state.clickTotal === '50' ){
+      upgradeButton = (
+        <p 
+        className='upgraded-button'>
+        CLEAR</p>
+      );
+
+      this.timerStop();
+
+      const resetDiv = document.querySelector('.App-result');
+      resetDiv.style.display = 'block';
+    }
+
+    let resetButton = (
+      <p onClick={this.onResetHandler}
+      id='resetButton'
+      className='reset-button'>
+      RESET</p>
+    );
+
+    // console.log(this.state.timer);
 
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
-            If You do button clicked reach 100 times,This Game will finish.
+            100回クリックできれば、このゲームはクリアだ！
           </p>
           <div>
-            {/* titleクラスにpropsとしてtitle,titlyStyleを設定 */}
-            {/* この要素にクリックした場合、イベントハンドラを呼ぶ */}
-            {/* spanの中だけを書き換えている */}
           <Title title="Hello World 3.0" titleStyle={{color : "orange"}}>
-            CLICK <span id='versionCounter' style={{borderBottom: '1px solid orange'}}>{this.state.version}</span></Title>
-
+            COUNT <span id='versionCounter' style={{borderBottom: '1px solid orange'}}>{this.state.clickTotal}</span></Title>
             {upgradeButton}
-
-          <Todo />
           </div>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React and Hello World.
-          </a>
+
+          <div className='App-result'>
+            <p>
+              このゲームは大切ものを盗んでいきました。あなたの時間です。
+              経過時間 {this.state.timer}秒
+            </p>
+            {resetButton}
+          </div>
         </header>
       </div>
     );
